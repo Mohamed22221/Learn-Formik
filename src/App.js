@@ -34,7 +34,7 @@ function App() {
     onSubmit,
     validate,
   });
-  console.log(formik.errors, "formik");
+  console.log(formik.touched, "formik touch");
 
   return (
     <div className="App">
@@ -46,8 +46,9 @@ function App() {
             type="text"
             value={formik.values.name}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
-          {formik.errors.name ? (
+          {formik.touched.name && formik.errors.name ? (
             <div className="error">{formik.errors.name}</div>
           ) : null}
         </div>
@@ -58,8 +59,9 @@ function App() {
             type="email"
             value={formik.values.email}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
-          {formik.errors.email ? (
+          {formik.touched.email && formik.errors.email ? (
             <div className="error">{formik.errors.email}</div>
           ) : null}
         </div>
@@ -70,8 +72,9 @@ function App() {
             type="password"
             value={formik.values.password}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
-          {formik.errors.password ? (
+          {formik.touched.password && formik.errors.password ? (
             <div className="error">{formik.errors.password}</div>
           ) : null}
         </div>
