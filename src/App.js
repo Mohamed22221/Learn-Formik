@@ -1,6 +1,6 @@
-import logo from "./logo.svg";
+
 import "./App.css";
-import { useFormik, yupToFormErrors } from "formik";
+import { useFormik } from "formik";
 import { object, string  } from 'yup';
 function App() {
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
@@ -26,7 +26,7 @@ function App() {
     validationSchema,
 
   });
-  console.log(formik.isValid, "formik touch");
+  console.log({...formik.getFieldProps("name")})
 
   return (
     <div className="App">
@@ -34,11 +34,8 @@ function App() {
         <div className="form-control">
           <label>Name</label>
           <input
-            name="name"
             type="text"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            {...formik.getFieldProps("name")}
           />
           {formik.touched.name && formik.errors.name ? (
             <div className="error">{formik.errors.name}</div>
@@ -47,11 +44,8 @@ function App() {
         <div className="form-control">
           <label>Email</label>
           <input
-            name="email"
             type="email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            {...formik.getFieldProps("email")}
           />
           {formik.touched.email && formik.errors.email ? (
             <div className="error">{formik.errors.email}</div>
@@ -60,11 +54,8 @@ function App() {
         <div className="form-control">
           <label>phone</label>
           <input
-            name="phoneNumber"
             type="number"
-            value={formik.values.phoneNumber}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            {...formik.getFieldProps("number")}
           />
           {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
             <div className="error">{formik.errors.phoneNumber}</div>
@@ -73,11 +64,8 @@ function App() {
         <div className="form-control">
           <label>Password</label>
           <input
-            name="password"
             type="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            {...formik.getFieldProps("password")}
           />
           {formik.touched.password && formik.errors.password ? (
             <div className="error">{formik.errors.password}</div>
