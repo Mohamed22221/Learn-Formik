@@ -1,6 +1,7 @@
 import "./App.css";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import { object, string } from "yup";
+import TextError from "./components/TextError";
 function NewFormik() {
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -46,27 +47,33 @@ function NewFormik() {
           <div className="form-control">
             <label>Name</label>
             <Field type="text" name="name" />
-            <ErrorMessage name="name" />
+            <ErrorMessage name="name" component={TextError} />
           </div>
           <div className="form-control">
             <label>Email</label>
             <Field type="email" name="email" />
-            <ErrorMessage name="email" />
+            <ErrorMessage name="email" >
+              {
+                (error) =>{
+                  return <TextError >{error}</TextError>
+                }
+              }
+            </ErrorMessage>
           </div>
           <div className="form-control">
             <label>phone</label>
             <Field type="number" name="phoneNumber" />
-            <ErrorMessage name="phoneNumber" />
+            <ErrorMessage name="phoneNumber" component={TextError} />
           </div>
           <div className="form-control">
             <label>Password</label>
             <Field type="password" name="password" />
-            <ErrorMessage name="password" />
+            <ErrorMessage name="password" component={TextError} />
           </div>
           <div className="form-control">
             <label>comments</label>
             <Field as="textarea" name="comments" />
-            <ErrorMessage name="comments" />
+            <ErrorMessage name="comments" component={TextError} />
           </div>
           <div className="form-control">
             <label>address</label>
@@ -78,7 +85,7 @@ function NewFormik() {
                   <div>
                     <input type="text" id="address" {...field} />
                     {meta.error && meta.touched ? (
-                      <div>{meta.touched}</div>
+                      <TextError >{meta.error}</TextError>
                     ) : null}
                   </div>
                 );
