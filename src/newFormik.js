@@ -9,9 +9,13 @@ function NewFormik() {
     email: "",
     password: "",
     phoneNumber: "",
+    comments: "",
+    address: "",
   };
-  const onSubmit = (data) => {
+
+  const onSubmit = (data, actions) => {
     console.log(data);
+    actions.resetForm({ data: "" });
   };
   const validationSchema = object().shape({
     name: string()
@@ -20,10 +24,14 @@ function NewFormik() {
       .max(50, "Too Long!"),
     email: string().email("Invalid email").required("required"),
     password: string().required("required"),
+
     phoneNumber: string()
       .matches(phoneRegExp, "Phone number is not valid")
       .required("required")
       .optional(),
+    comments: string().required("required"),
+    address: string().required("required"),
+
   });
 
   return (
@@ -33,10 +41,7 @@ function NewFormik() {
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      {({
-        isValid,
-        dirty,
-      }) => (
+      {({ isValid, dirty }) => (
         <Form>
           <div className="form-control">
             <label>Name</label>
@@ -57,6 +62,28 @@ function NewFormik() {
             <label>Password</label>
             <Field type="password" name="password" />
             <ErrorMessage name="password" />
+          </div>
+          <div className="form-control">
+            <label>comments</label>
+            <Field as="textarea" name="comments" />
+            <ErrorMessage name="comments" />
+          </div>
+          <div className="form-control">
+            <label>address</label>
+            <Field type="text" name="address">
+              {(props) => {
+                console.log(props);
+                const { field, form, meta } = props;
+                return (
+                  <div>
+                    <input type="text" id="address" {...field} />
+                    {meta.error && meta.touched ? (
+                      <div>{meta.touched}</div>
+                    ) : null}
+                  </div>
+                );
+              }}
+            </Field>
           </div>
           <button type="submit" disabled={!(dirty && isValid)}>
             Send

@@ -35,7 +35,7 @@ function OldFormik() {
 
   return (
     <div className="App">
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} >
         <div className="form-control">
           <label>Name</label>
           <input type="text" {...formik.getFieldProps("name")} />
