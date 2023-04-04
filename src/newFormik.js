@@ -1,5 +1,5 @@
 import "./App.css";
-import { Form, Formik, Field, ErrorMessage } from "formik";
+import { Form, Formik, Field, ErrorMessage, FieldArray } from "formik";
 import { object, string } from "yup";
 import TextError from "./components/TextError";
 function NewFormik() {
@@ -17,6 +17,7 @@ function NewFormik() {
       twitter: "",
     },
     numbers: ["", ""],
+    phNumbers: [""],
   };
 
   const onSubmit = (data, actions) => {
@@ -41,7 +42,6 @@ function NewFormik() {
       facebook: string().required("required"),
       twitter: string().required("required"),
     }),
-
   });
 
   return (
@@ -82,6 +82,36 @@ function NewFormik() {
             <Field type="number" name="numbers[1]" />
             <ErrorMessage name="numbers[1]" component={TextError} />
           </div>
+          <div className='form-control'>
+              <label>List of phone numbers</label>
+              <FieldArray name='phNumbers'>
+                {fieldArrayProps => {
+                  const { push, remove, form } = fieldArrayProps
+                  const { values } = form
+                  const { phNumbers } = values
+                  // console.log('fieldArrayProps', fieldArrayProps)
+                  // console.log('Form errors', form.errors)
+                  return (
+                    <div>
+                      {phNumbers.map((_, index) => (
+                        <div key={index}>
+                          <Field name={`phNumbers[${index}]`} />
+                          {index > 0 && (
+                            <button type='button' onClick={() => remove(index)}>
+                              -
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                      <button type='button' onClick={() => push('')}>
+                        +
+                      </button>
+                    </div>
+                  )
+                }}
+              </FieldArray>
+            </div>
+
           <div className="form-control">
             <label>Password</label>
             <Field type="password" name="password" />
