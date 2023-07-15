@@ -57,13 +57,13 @@ function OldFormik() {
             <div className="error">{formik.errors.phoneNumber}</div>
           ) : null}
         </div>
-        {/* <div className="form-control">
+        <div className="form-control">
           <label>Password</label>
           <input type="password" {...formik.getFieldProps("password")} />
           {formik.touched.password && formik.errors.password ? (
             <div className="error">{formik.errors.password}</div>
           ) : null}
-        </div> */}
+        </div>
         <button type="submit" disabled={!(formik.dirty && formik.isValid)}>
           Send
         </button>
