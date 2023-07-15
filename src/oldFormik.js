@@ -51,7 +51,7 @@ function OldFormik() {
           ) : null}
         </div>
         <div className="form-control">
-          <label>phone</label>
+          <label>phone Number</label>
           <input type="number" {...formik.getFieldProps("number")} />
           {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
             <div className="error">{formik.errors.phoneNumber}</div>
