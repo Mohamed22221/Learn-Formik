@@ -1,9 +1,4 @@
-.App {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 15px;
-}
+
 
 label {
   font-weight: bold;
@@ -25,7 +20,7 @@ input[type='number'],
 textarea,
 select {
   display: block;
-  width: 400px;
+  width: 500px;
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;
@@ -43,4 +38,16 @@ select {
 
 .error {
   color: red;
+}
+.wrapper-style{
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+.docs{
+  width: 500px;
+  font-weight: 400;
 }

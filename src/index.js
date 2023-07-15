@@ -7,8 +7,8 @@ import NewFormik from './newFormik';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    
     <NewFormik />
-
   </React.StrictMode>
 );
 

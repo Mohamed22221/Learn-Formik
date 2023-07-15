@@ -46,13 +46,13 @@ function NewFormik() {
 
   return (
     <Formik
-      className="App"
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
       {({ isValid, dirty }) => (
-        <Form>
+        <Form className="wrapper-style">
+          <h2>Create Form (docs) </h2>
           <div className="form-control">
             <label>Name</label>
             <Field type="text" name="name" />
@@ -82,48 +82,52 @@ function NewFormik() {
             <Field type="number" name="numbers[1]" />
             <ErrorMessage name="numbers[1]" component={TextError} />
           </div>
-          <div className='form-control'>
-              <label>List of phone numbers</label>
-              <FieldArray name='phNumbers'>
-                {fieldArrayProps => {
-                  const { push, remove, form } = fieldArrayProps
-                  const { values } = form
-                  const { phNumbers } = values
-                  // console.log('fieldArrayProps', fieldArrayProps)
-                  // console.log('Form errors', form.errors)
-                  return (
-                    <div>
-                      {phNumbers.map((_, index) => (
-                        <div key={index}>
-                          <Field name={`phNumbers[${index}]`} />
-                          {index > 0 && (
-                            <button type='button' onClick={() => remove(index)}>
-                              -
-                            </button>
-                          )}
-                        </div>
-                      ))}
-                      <button type='button' onClick={() => push('')}>
-                        +
-                      </button>
-                    </div>
-                  )
-                }}
-              </FieldArray>
-            </div>
+          <div className="form-control">
+            <label>List of phone numbers</label>
+            <FieldArray name="phNumbers">
+              {(fieldArrayProps) => {
+                const { push, remove, form } = fieldArrayProps;
+                const { values } = form;
+                const { phNumbers } = values;
+                // console.log('fieldArrayProps', fieldArrayProps)
+                // console.log('Form errors', form.errors)
+                return (
+                  <div>
+                    {phNumbers.map((_, index) => (
+                      <div key={index}>
+                        <Field name={`phNumbers[${index}]`} />
+                        <ErrorMessage
+                          name={`phNumbers[${index}]`}
+                          component={TextError}
+                        />
+                        {index > 0 && (
+                          <button type="button" onClick={() => remove(index)}>
+                            -
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                    <button type="button" onClick={() => push("")}>
+                      +
+                    </button>
+                  </div>
+                );
+              }}
+            </FieldArray>
+          </div>
 
           <div className="form-control">
-            <label>Password</label>
+            <label htmlFor="password">Password</label>
             <Field type="password" name="password" />
             <ErrorMessage name="password" component={TextError} />
           </div>
           <div className="form-control">
-            <label>comments</label>
+            <label htmlFor="comments">comments</label>
             <Field as="textarea" name="comments" />
             <ErrorMessage name="comments" component={TextError} />
           </div>
           <div className="form-control">
-            <label>address</label>
+            <label htmlFor="address">address</label>
             <Field type="text" name="address">
               {(props) => {
                 console.log(props);
@@ -140,12 +144,12 @@ function NewFormik() {
             </Field>
           </div>
           <div className="form-control">
-            <label>facebook</label>
+            <label htmlFor="facebook">facebook</label>
             <Field as="textarea" name="social.facebook" />
             <ErrorMessage name="social.facebook" component={TextError} />
           </div>
           <div className="form-control">
-            <label>twitter</label>
+            <label htmlFor="twitter">twitter</label>
             <Field as="textarea" name="social.twitter" />
             <ErrorMessage name="social.twitter" component={TextError} />
           </div>
